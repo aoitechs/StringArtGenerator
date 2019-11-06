@@ -7,49 +7,51 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="style.css">
 
-        <title>String Art Generator</title>
+        <title>绕线画生成器</title>
     </head>
 <body>
     <div class="container">
         <div class="jumbotron" style="padding-bottom: 20px !important;">
+            <!--
             <div style="float: left; position: absolute; top: 20px;">
                 <a href="https://github.com/halfmonty/StringArtGenerator">Find on Github</a>
             </div>
-            <h1>String Art Generator</h1>
+            -->
+            <h1>绕线画生成器</h1>
             <div style="float: right; margin-top: -40px;">
-                Already have steps generated? 
-                <button class="btn btn-primary" onclick="onHasSteps();">Click Here</button>
+                已经有生成结果了？
+                <button class="btn btn-primary" onclick="onHasSteps();">点击这里</button>
             </div>
-            <h2 id="status">Please wait: loading...</h2><br/>
+            <h2 id="status">生成器正在加载中……</h2><br/>
 
-            <span>Wait for generate to complete loading.<br/>
-            For best results use close up high contrast pictures.<br/>
-            If the page crashes (which it may) just refresh or close and re-open the tab/window.<br/><br/>
+            <span>等待生成器加载完毕。<br/>
+            为了达到最佳效果，我们建议使用高对比度的图片。<br/>
+            如果页面崩溃了，请刷新页面。<br/><br/>
             </span>
             <br/>
-            <div><h5>Variables to play with:</h5></div>
+            <div><h5>可选参数：</h5></div>
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="numberOfPins">Number of Pins</label>
+                        <label for="numberOfPins">钉子数量</label>
                         <input type="text" class="form-control" id="numberOfPins">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="numberOfLines">Number of Lines</label>
+                        <label for="numberOfLines">连线数量</label>
                         <input type="text" class="form-control" id="numberOfLines">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="lineWeight">Line Weight</label>
+                        <label for="lineWeight">连线粗细</label>
                         <input type="text" class="form-control" id="lineWeight">
                     </div>
                 </div>
             </div>
             <label class="btn btn-primary btn-file">
-                Click Here and select an Image to Start  <input type="file" id="fileInput" style="display: none;">
+                单击以上传图片并开始生成  <input type="file" id="fileInput" style="display: none;">
             </label>
         </div>
         
@@ -60,32 +62,34 @@
                     <img class="centerImage" id="imageSrc" alt="No Image" />
                 </div>
                 <div id="step2" class="inputoutput center hidden">
-                    <div class="caption">Cropped and Grayscaled:</div>
+                    <div class="caption">裁剪并灰度处理：</div>
                     <canvas class="centerCanvasMedium" id="canvasOutput" ></canvas>
                 </div>
                 <div id="step3" class="inputoutput center hidden">
-                    <div class="caption">String Art Output:</div>
+                    <div class="caption">绕线画输出：</div>
                     <div id="drawStatus"></div>
                     <canvas class="centerCanvasLarge" id="canvasOutput2" ></canvas>
                 </div>
                 <div id="showPins" class="inputoutput center hidden">
-                    <textarea id="pinsOutput" rows="10" cols="100"></textarea>
+                    <textarea id="pinsOutput" rows="10" cols="80"></textarea>
+                    <!--
                     <div class="centerBorderless">
                         <span>These examples will overwrite your generated output. Please copy your output first if you need to before clicking an example button.</span><br/><br/>
                         <button style="float: left;" onclick="example1();">Example 1</button>
                         <button style="float: left;" onclick="example2();">Example 2</button>
                         <button style="float: left;" onclick="example3();">Example 3</button>
                     </div><br/><br/>
-                    <span>Copy these numbers to save for later so you don't have to generate them again.</span><br/>
-                    <span>If you copied the numbers from a previous run, paste them above.</span><br/>
-                    <span>These numbers are used to help walk you through creating this string art</span><br/><br/>
+                    -->
+                    <span>将上面的输出结果保存下来的话，以后可以直接在页面顶端使用。</span><br/>
+                    <span>如果你有输出结果，直接粘贴在上面的文本框中。</span><br/>
+                    <span>这些数字有助于你一步一步完成自己的绕线画。</span><br/><br/>
                     <div style="height: 30px;">
-                        <button style="float: left;" onclick="startCreating();">Start Creating</button>
-                        <button style="float: right;" onclick="startDrawing();">Just Draw</button>
+                        <button style="float: left;" onclick="startCreating();">开始制作</button>
+                        <button style="float: right;" onclick="startDrawing();">直接绘制</button>
                     </div>
                 </div>
                 <div id="incrementalDrawing" class="inputoutput center hidden">
-                    <div class="caption">String Art Output:</div>
+                    <div class="caption">绕线画输出：</div>
                     <span id="incrementalCurrentStep"></span>
                     <div id="drawStatus"></div>
                     <canvas class="centerCanvasLarge" id="canvasOutput3" ></canvas>
@@ -684,7 +688,7 @@ function example3(){
 function onOpenCvReady() {
     // even when this is called, sometimes it's still not ready, adding slight time buffer
     setTimeout(function(){
-        document.getElementById('status').innerHTML = 'Generator is ready.';
+        document.getElementById('status').innerHTML = '生成器已准备就绪。';
     }, 1000);
 
     numberOfPins.value = N_PINS;
